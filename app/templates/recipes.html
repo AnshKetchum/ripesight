@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <title>Ripe Sight</title>
+<div class="topnav">
+  <a href="{{ url_for('home') }}">Home</a><div style='text-align:center'></div>
+  <a href="{{ url_for('login') }}">Login</a>
+  <a class="active" href="#active">Recipes</a>
+  <a href="#about">Create Account</a>
+</div>
+<h1 class="title1">Welcome to RipeSight</h1>
+  <p class="title5" style="display:table;margin:auto"><img class="gears" id="gear1" src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fclipart-library.com%2Fimages_k%2Fgear-clipart-transparent%2Fgear-clipart-transparent-5.png&f=1&nofb=1" style="width:5vw;">Powered by ML<img class="gears" id="gear2" src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fclipart-library.com%2Fimages_k%2Fgear-clipart-transparent%2Fgear-clipart-transparent-5.png&f=1&nofb=1" style="width:5vw;"></p>  
+  
+  <div class="image-recog" id="aiInsert">
+    <h3 style="color: #190033;font-size:30px;font-family: Poppins;"> Here's What We Found! </h3>
+    <img class="main-img mbr-figure w-50 h-25 rounded center" id="image" src="{{ url_for('static', filename='uploads/image-upload/' + filename)}}" style="">
+    {%for i in message%}
+      <h5 id="getMessage" style="color: #190033;font-size:20px" id="aiOut">{{ i }} ~ {{ message[i] }}</h5>
+    {%endfor%}
+    <hr class="solid-hr">
+  </div>
+  
+  <p class="title6">Search for your favorite recipes</p>
+  <p>Separate by commas, not case sensitive</p>
+  <style>
+    .solid-hr {
+      border-top: 8px solid black;
+      border-radius: 5px;
+    }
+    .image-recog {
+      display:table;
+      text-align:center;
+      margin:auto;
+    }
+    @keyframes rotate1 {
+      from {transform: rotate(-45deg)}
+      to {transform: rotate(45deg)}
+    }
+    @keyframes rotate2 {
+      from {transform: rotate(45deg)}
+      to {transform: rotate(-45deg)}
+    }
+    #gear1 {
+      animation: rotate1 2s;
+    }
+    #gear2 {
+      animation: rotate2 2s;
+    }
+    .title6 {
+      text-align: center;
+      font-size: 30px;
+    }
+    .title5 {
+      margin-left:21vw;
+      padding: 10px;
+      font-size: 60px;
+    }
+    .gears {
+      filter: brightness(1);
+      display:inline;
+    }
+    */
+    body {
+      font-family: Poppins;
+    }
+    .title3 {
+      margin: auto;
+      margin-top: 5px;
+      margin-bottom: 5px;
+      padding: 10px;
+      text-align: center;
+      font-size: 40px;
+    }
+    .title2{
+      margin: auto;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      width: 25%;
+      padding: 10px;
+      text-align: center;
+      font-size: 40px;
+      opacity: 1.0;
+    }
+    .title1{
+      animation-duration: 3s;
+      animation-name: slidein-right;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      padding: 10px;
+      font-size: 60px;
+      text-align:center;
+    }
+        /* Add a black background color to the top navigation */
+    .topnav {
+      background-color: #0093E9;
+      background-image: linear-gradient(160deg, #00FF6F 0%, #80D0C7 100%);
+      overflow: hidden;
+      background-color: #B5B5B5;
+    }
+
+    /* Style the links inside the navigation bar */
+    .topnav a {
+      background-color: #80D0C7;
+      transition background-color 1s;
+      float: left;
+      color: #f2f2f2;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+      font-size: 17px;
+      transition: background-color 0.5s;
+      transition: color 0.5s;
+      margin: 0px 0px;
+    }
+
+    /* Change the color of links on hover */
+    .topnav a:hover {
+      background-color: #33FF99;
+      transition background-color 1s;
+      color: black;
+      transition: background-color 0.5s;
+      transition: color 0.5s;
+    }
+
+    /* Add a color to the active/current link */
+    .topnav a.active {
+      background-color: #0BDFB5;
+      color: white;
+    }
+    
+    
+    .search {
+      display: table;
+      margin: auto;
+      /*padding-left:20vw;
+      padding-right:20vw;*/
+      width:40vw;
+      padding-top: 1vh;
+      padding-bottom: 1vh;
+      border-radius: 50px;
+      border: none;
+      background-color: white;
+      transition: background-color 0.5s;
+      color: #404040;
+    }
+    .search:focus {
+      background-color: #99CCFF;
+      transition: background-color 0.5s;
+    }
+  </style>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      background-color: #F4D03F;
+      background-image: linear-gradient(132deg, #9EFFA4 0%, #16A085 100%);
+    }
+    /* Add a black background color to the top navigation */
+    /* Style the links inside the navigation bar */
+
+    .container h1, p {
+      text-align: center;
+    }
+    .search-results li {
+      background-color:white;
+      padding-top:5px;
+      padding-bottom:5px;
+      border-style:solid;
+      border-width:1px;
+      padding-left:15px;
+      text-align: left;
+      width: 75%;
+      margin-left: auto;
+      margin-right:auto;
+      border-color: #ddd;
+        /* CLICK THE BUTTON LABELED TEST*/
+      /*Thats how are website will add recipes*/
+    }
+    .autogen-recipes {
+      padding-left: auto;
+      padding-right: auto;
+      padding: 1vh 1vw;
+      background-color: white;
+      border-radius:
+    }
+    .autogen-recipes p {
+      text-align: left;
+    }
+  </style>
+
+</head>
+
+<body onload="loadImageRecognition()">
+  
+  <form>
+    <input type="search" class="search" placeholder=" Search..." onfocus="startAnimation(this.id)" onblur="blurFunction(this.id)" onchange="getSearch()" id="input">
+  </form>
+  <br>
+  <details class="autogen-recipes" style="display:none;" id="autoGen">
+    <summary>AI-generated recipe</summary>
+    <p id="aiGeneratedRecipe">
+      Auto-generated thing here.
+    </p>
+  </details>
+  <br>
+  
+  
+  <ul style="list-style-type:none" class="search-results" id="searches">
+    <span id="jsAdd"></span>
+  </ul>
+
+  
+  <button onclick='yoinkRecipeData({"array1":["test","hello","world"]})'>Send ajax</button>
+  <!-- HERE IS YOUR FREAKING SOLUTION-->
+  <a href="{{ url_for('view_recipe',url='test') }}" id="aneurism">I don't exist :)</a>
+  
+  
+  
+  
+</body>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+  body {
+  font-family: 'Poppins';
+  color: #190033;
+}
+</style><span style='font-family:Lucida Sans'>    </span><span style='font-family:Lucida Grande'>    </span>
+      <script>
+        /*const title = JSON.parse("{{ titles }}");
+        const description = JSON.parse("{{ descs }}");
+        const rating = JSON.parse("{{ ratings }}");
+        const url = JSON.parse("{{ urls }}");*/
+        
+        const title = JSON.parse({{ titles | tojson }});
+        const description = JSON.parse({{ descs | tojson }});
+        const rating = JSON.parse({{ ratings | tojson }});
+        const url = JSON.parse({{ urls | tojson }});
+       
+        
+        /*const title = ["hello","world","foo","bar","hello friend"];
+        const description = ["h","w","f","b","hf"];
+        const rating = ["1","2","3","4","5"];
+        const url = ["https://www.allrecipes.com/recipe/278339/amish-apple-dumplings/","https://www.allrecipes.com/recipe/7742/apple-dump-cake/","https://www.allrecipes.com/recipe/234069/apple-almond-pie/","https://www.allrecipes.com/recipe/282981/apple-cobbler/","https://www.allrecipes.com/recipe/11462/butterscotch-apple-cookies/"];*/
+       
+        
+        //alert({{ titles }});
+        
+// General AJAX wrapper function.
+// INPUTS:
+//      url - URL to which to send ajax request.
+//      requestType - "post" or "get".
+//      objectToSend - Javascript object to send as JSON or FormData object.
+//      doneFunc - Function with signature func(data, context) called when ajax response is received (or errors out).
+//                  data - the response data
+//                  context - handle to the original ajax query object.
+//      containsMultipartFormdata - True: FormData with enctype="multipart/form-data" that transfer a file;
+//                                  False: Regular json or forms w/o file transfer
+//      userStorage - An object (or null) that contains context data that will be available from the doneFunc.
+function ajax(url, requestType, objectToSend, doneFunc=null, containsMultipartFormdata=false, userStorage=null) {
+    // TODO: Check for valid parameters
+    // TODO: Figure out what to put in doneFunc to check if error occurred or data returned successfully.
+
+    // If debugEnabled variable hasn't been defined at global scope, default to false
+    if (typeof window.debugEnabled === 'undefined') {
+        debugEnabled=false;
+    }
+
+    if (containsMultipartFormdata === true) {
+        // Forms with file uploads require options to handle form 'enctype' multipart/form-data.
+        $.ajax({
+            type: requestType,
+            url: url,
+            dataType: "json",
+            processData: false,         // Required for multipart/form-data: Don't process data before sending
+            contentType: false,         // Required for multipart/form-data: Don't use "application/x-www-form-urlencoded"
+            userStorage: userStorage,   // General purpose context info storage to be available from doneFunc
+            data: objectToSend
+        }).always(ajaxDone)
+
+    } else {
+        // Forms/data without file transfer
+        $.ajax({
+            type: requestType,
+            url: url,
+            dataType: "json",
+            userStorage: userStorage,   // General purpose context info storage to be available from doneFunc
+            data: objectToSend
+        }).always(ajaxDone)
+    }
+
+    // Debug wrapper function
+    function ajaxDone(data) {
+        if (debugEnabled) {
+            console.log("Ajax RX: ", data)
+        }
+
+        // Call desired done function
+        if (doneFunc != null) {
+            // Pass response data and 'this' to allow access from the doneFunc to the ajax query's original object (specifically, to
+            // allow access to userStorage).
+            doneFunc(data, this);
+        }
+    }
+
+    if (debugEnabled) {
+        console.log("Ajax TX: ", objectToSend)
+    }
+}
+        
+      function save(text) {
+        sessionStorage.setItem("recipe",text)
+        //location.href = "recipe_view.html";
+        window.open("recipe_view.html");
+      }
+      function startAnimation(element) {
+        var el1 = document.getElementById("gear1");
+        var el2 = document.getElementById("gear2");
+        
+        el1.style.animation = "rotate1 2s infinite"
+        el2.style.animation = "rotate2 2s infinite"
+      }
+        
+      function blurFunction(element) {
+        var el1 = document.getElementById("gear1");
+        var el2 = document.getElementById("gear2");
+        
+        el1.style.animation = "rotate1 2s"
+        el2.style.animation = "rotate2 2s"
+      }
+      function addSearch(title, description, rating, url) {
+        var jsMarker = document.getElementById("jsAdd");
+        jsMarker.insertAdjacentHTML('afterend', `<li onclick='openNewWindow(this.className)' class='${url}'><strong>${title}</strong>          <span style="font-size:10px">     ${rating}</span><br> ${description} <br> <span style="font-size:10px">${url}</span></li>`);
+      }
+      function querySearch(search) {
+        var searchMain = search.replace(" ", "");
+        const newSearch = searchMain.split(",");
+        for (let j = 0; j<newSearch.length; j++) {
+          for (let i = 0; i<title.length; i++) {
+            if (title[i].toLowerCase().search(newSearch[j].toLowerCase())!=-1||description[i].toLowerCase().search(newSearch[j].toLowerCase())!=-1)             {addSearch(title[i],description[i],rating[i],url[i])}
+          }
+        }
+      }
+    function getSearch() {
+      var autoRecipe = document.getElementById("autoGen");
+      autoRecipe.style.display = "block";
+      var jsList = document.getElementById("searches");
+      jsList.innerHTML = "<span id='jsAdd'></span>";
+      var searchbar = document.getElementById("input");
+      querySearch(searchbar.value);
+      // AJAX
+      var jsonList = searchbar.value;
+      var searchMain = jsonList.replace(" ", "");
+      const searchToSend = searchMain.split(",");
+      const finalSend = {"array1":searchToSend};
+      yoinkRecipeData(finalSend);
+    }
+    function loadImageRecognition() {
+      var newMessage = document.getElementById("getMessage").innerHTML;
+      if (newMessage=="{{ message }}"||newMessage=="None"||newMessage=="0") {
+        var aiElement = document.getElementById("aiInsert");
+        var aiElement1 = document.getElementById("aiOut");
+        aiElement.remove();
+        aiElement1.remove();
+        }
+      }
+        /* YOU WANT A DARN SOLUTION? ILL GIVE YOU A SOLUTION*/
+    function openNewWindow(text) {
+      sessionStorage.setItem("recipe",text);
+      var aneurism = document.getElementById("aneurism");
+      aneurism.click()
+    }
+    function finishFunc(newRecipeArr,context) {
+      console.log("New recipe:");
+      console.log(newRecipeArr);
+      var aiGenRecipe = document.getElementById("aiGeneratedRecipe");
+      aiGenRecipe.innerHTML = "";
+      for (let x = 0; x<newRecipeArr.length; x++) {
+        aiGenRecipe.innerHTML = aiGenRecipe.innerHTML + newRecipeArr[x];
+        aiGenRecipe.innerHTML = aiGenRecipe.innerHTML + "<br><br>";
+      }
+    }
+    function yoinkRecipeData(recipe_ingredients) {
+      var sendReady = recipe_ingredients;
+      
+      
+      console.log("To be sent:");
+      console.log(sendReady);
+      ajax("{{ url_for('sendRecipe') }}", "post", sendReady, finishFunc, containsMultipartFormdata=false, userStorage=null);
+      /*$.ajax({
+         type: "POST",
+          url: "{{ url_for('sendRecipe') }}",
+          data: sendReady,
+          contentType: "application/json",
+          dataType: 'json',
+          success: function(newRecipeArr) {
+             console.log("New recipe:");
+             console.log(newRecipeArr);
+          }
+       });*/
+    }
+
+
+
+
+
+      </script>
+
+
+

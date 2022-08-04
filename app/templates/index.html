@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<head>
+  <title>Ripe Sight</title>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<div class="topnav">
+  <a class="active" href="#home">Home</a><div style='text-align:center'></div>
+  <a href="{{ url_for('login') }}">Login</a>
+  <a href="{{ url_for('recipes') }}">Recipes</a>
+  <a href="#about">Create Account</a>
+</div>
+<h1 class="title1">Welcome to RipeSight</h1>
+  <p class="title5" style="display:table;margin:auto"><img class="gears" src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fclipart-library.com%2Fimages_k%2Fgear-clipart-transparent%2Fgear-clipart-transparent-5.png&f=1&nofb=1" style="width:5vw;">Powered by ML<img class="gears" src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fclipart-library.com%2Fimages_k%2Fgear-clipart-transparent%2Fgear-clipart-transparent-5.png&f=1&nofb=1" style="width:5vw;"></p>  
+  <style>
+    @keyframes slidein-left {
+      /*0% {margin-left: 5px}
+      50% {margin-left: 10px}
+      75% {margin-left: 5px}
+      100% {margin-left: 0px}*/
+      from {margin-left: 100vw}
+      to {margin-left: 21vw}
+    }
+    @keyframes slidein-right {
+      from {margin-left: 0vw}
+      to {margin-left: 21vw}
+    }
+    @keyframes hyperfade-in {
+      from {border-radius: 1000px}
+      to {border-radius: 0px}
+    }
+    .title5 {
+      margin-left:21vw;
+      padding: 10px;
+      font-size: 60px;
+      animation-duration: 3s;
+      animation: slidein-left 2s;
+    }
+    .gears {
+      filter: brightness(1);
+      display:inline;
+    }
+    .file-drag {
+      display: table;
+      padding-left:100px;
+      padding-top:15vh;
+      padding-bottom:15vh;
+      padding-right:100px;
+      margin: auto;
+      border-radius: 10px;
+      border-style: dashed;
+      border-width: 5px;
+      border-color: #DFDEDE;
+      color: #868686;
+      font-size: 30px;
+      z-index: 1;
+      background-color: #F7F7F7;
+      background-image: url('https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fclipart-library.com%2Fimages_k%2Fcloud-transparent-clipart%2Fcloud-transparent-clipart-16.png&f=1&nofb=1');
+      background-size: 475px 300px;
+      background-position: center;
+      background-repeat: no-repeat;
+      text-shadow: 0px 0px 0px black;
+    }
+    .upload-button {
+      border-style: none;
+      font-size: 30px;
+      background-color: lightblue;
+      border-radius: 20px;
+      color: white;
+      padding: 15px 30px;
+      box-shadow: 5px 5px 5px #808080;
+    }
+    .upload-button:active {
+      box-shadow: 1px 1px 5px #808080;
+    }
+    .upload_drop {
+      position: relative;
+      /*overflow: hidden;*/
+      display: inline-block;
+    }
+    .upload-drop input[type=file] {
+      margin-left: 21vw;
+      z-index: 15;
+      font-size: 100px;
+      position: absolute;
+      left: 0;
+      top: 0;
+      opacity: 0;
+    }
+
+    /*
+    #upload_something {
+      background-color: #4CAF50; /* Green */
+      border: none;
+      color: white;
+      padding-left: 0vw;
+      padding-right: 0vw;
+      padding-top: 3vh;
+      padding-bottom: 3vh;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 7vw;
+      margin-left: 0vw;
+      border-radius: 5px;
+      background-image: linear-gradient(160deg, #00FF6F 0%, #80D0C7 100%);
+      box-shadow: 10px 10px 5px black;
+    }
+    #upload_something:active {
+      box-shadow: 2px 2px 5px black;
+      background-image: linear-gradient(160deg, #00FF9F 0%, #80D0C7 100%)
+    }
+    */
+    body {
+      font-family: Poppins;
+    }
+    hr.dashed {
+      border-top: 8px solid black;
+      border-radius: 5px;
+    }
+    .title3 {
+      margin: auto;
+      margin-top: 5px;
+      margin-bottom: 5px;
+      padding: 10px;
+      text-align: center;
+      font-size: 40px;
+    }
+    .title2{
+      margin: auto;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      width: 25%;
+      padding: 10px;
+      text-align: center;
+      font-size: 40px;
+      opacity: 1.0;
+    }
+    .abt {
+      margin: auto;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      width: 60%;
+      padding: 10px;
+      text-align: center;
+      font-size: 30px;
+      text-shadow: 0px 0px 0px #000000;
+    }
+    .title1{
+      animation-duration: 3s;
+      animation-name: slidein-right;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      padding: 10px;
+      font-size: 60px;
+      text-align:center;
+    }
+        /* Add a black background color to the top navigation */
+    .topnav {
+      background-color: #0093E9;
+      background-image: linear-gradient(160deg, #00FF6F 0%, #80D0C7 100%);
+      overflow: hidden;
+      background-color: #B5B5B5;
+    }
+
+    /* Style the links inside the navigation bar */
+    .topnav a {
+      background-color: #80D0C7;
+      transition background-color 1s;
+      float: left;
+      color: #f2f2f2;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+      font-size: 17px;
+      transition: background-color 0.5s;
+      transition: color 0.5s;
+    }
+
+    /* Change the color of links on hover */
+    .topnav a:hover {
+      background-color: #33FF99;
+      transition background-color 1s;
+      color: black;
+      transition: background-color 0.5s;
+      transition: color 0.5s;
+    }
+
+    /* Add a color to the active/current link */
+    .topnav a.active {
+      background-color: #0BDFB5;
+      color: white;
+    }
+    .line {
+      background-color: #006633;
+      color: #006633;
+    }
+  </style>
+<img src="https://assets.pbimgs.com/pbimgs/ab/images/dp/wcm/202209/1299/white-marble-fruit-bowl-z.jpg" class="images"/>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+    .images {
+      width: 500px;
+      height: 500px;
+      margin-top:10px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      border: 5px solid #2a854a;
+      animation-duration: 3s;
+      animation-name: hyperfade-in;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      background-color: #F4D03F;
+      background-image: linear-gradient(132deg, #9EFFA4 0%, #16A085 100%);
+    }
+    /* Add a black background color to the top navigation */
+    /* Style the links inside the navigation bar */
+
+    .container h1, p {
+      text-align: center;
+    }
+  </style>
+
+</head>
+
+<body>
+  <div class = "container">
+    <div class="vert"></div>
+    <span class = "txt-hero-container">
+    <div class="abtsec">
+      <div class="about-rs">
+<h2 class="title2" style="opacity: 1.0;">What is RipeSight? 🔎</h2>
+<p class="abt">RipeSight is a Computer Vision AI built to identify fruit and vegetables, determine if they are ripe or rotten, and even allow the user to view, share, and create recipes based on a given. RipeSight uses an object detection and computer vision API known as YOLOv5 in synergy with an object labeling model to quickly and accurately identify fruit and vegetables. Our model also makes use of free recipes from All Recipes to provide a large database of recipes for the user to choose from.</p>
+      </div>
+<br>
+<br>
+<hr class="dashed">
+<h2 class="title3">Upload an Image</h2>
+<p class="title3">Try out our model!</p>
+
+<br>
+<form  method="post" id="form" enctype="multipart/form-data">
+  <span class="file-drag" >
+    <br>
+    <br>
+    <input id="file" name= "file" type="file"  hidden />
+    Drag file here  <button class="upload-button"  id="uploader">Upload ↑</button>
+  <p style="color: #868686;text-shadow: 0px 0px 0px black;font-size:15px;" id="files_uploaded">No files uploaded yet.</p>
+  </span>
+</form>
+
+
+<br>
+<br/>
+<br/>
+<br/>
+<br>
+<br>
+<hr class="dashed">
+<h2 class="title3">Meet the Team</h2>
+<br>
+<br>
+<div class="flip-card">
+	<div class="flip-card-inner">
+		<div class="flip-card-front">
+			<div class="flip-card-img">
+				<img src="https://source.unsplash.com/mHmLGROu2rI/640x853" alt="Avatar Placeholder" />
+			</div>
+			<div class="flip-card-text">
+				<h2>Anne Crouch</h2>
+				<p class="title">Product Manager &amp; Frontend Developer</p>
+			</div>
+		</div>
+		<div class="flip-card-back">
+			<div class="flip-card-img">
+				<img src="https://media.giphy.com/media/S2whkd4LyloiI/giphy.gif" alt="Gif Placeholder" />
+			</div>
+			<div class="flip-card-text">
+				<h2>About Anne</h2>
+				<p>I am a rising freshmen from Virginia interested in art, music, and biomechanical engineering</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="flip-card">
+	<div class="flip-card-inner">
+		<div class="flip-card-front">
+			<div class="flip-card-img">
+				<img src="https://source.unsplash.com/ccp20jlgtWU/640x853" alt="Avatar Placeholder" />
+			</div>
+			<div class="flip-card-text">
+				<h2>Ryan Cho</h2>
+				<p class="title">Backend and Frontend Developer</p>
+			</div>
+		</div>
+		<div class="flip-card-back">
+			<div class="flip-card-img">
+				<img src="https://media.giphy.com/media/kBZrg2OcrcOFJikffT/giphy.gif" alt="Gif Placeholder" />
+			</div>
+			<div class="flip-card-text">
+				<h2>About Ryan</h2>
+				<p>I'm a rising sophomore based in Illinois, interested in medicine, data science, and competitive math!</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="flip-card">
+	<div class="flip-card-inner">
+		<div class="flip-card-front">
+			<div class="flip-card-img">
+				<img src="https://source.unsplash.com/xbVTW7sykVw/640x817" alt="Avatar Placeholder" />
+			</div>
+			<div class="flip-card-text">
+				<h2>Brett Smith</h2>
+				<p class="title">Machine Learning and Frontend Developer</p>
+			</div>
+		</div>
+		<div class="flip-card-back">
+			<div class="flip-card-img">
+				<img src="https://media.giphy.com/media/26gsuJYcHXm0oARQQ/giphy.gif" alt="Avatar Placeholder" />
+			</div>
+			<div class="flip-card-text">
+				<h2>About Brett</h2>
+				<h1>no</h1>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="flip-card">
+	<div class="flip-card-inner">
+		<div class="flip-card-front">
+			<div class="flip-card-img">
+				<img src="https://source.unsplash.com/6jzkzv5VhyE/640x960" alt="Avatar Placeholder" />
+			</div>
+			<div class="flip-card-text">
+				<h2>Kydan Taylor</h2>
+				<p class="title">Machine Learning and Backend Developer</p>
+<!--				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Magna etiam tempor orci eu lobortis. Consequat id porta nibh venenatis cras sed felis eget. Tortor at auctor urna nunc id cursus metus. Quis eleifend quam adipiscing vitae proin sagittis nisl rhoncus mattis.</p> -->
+			</div>
+		</div>
+		<div class="flip-card-back">
+			<div class="flip-card-img">
+				<img src="https://media.giphy.com/media/l2JI2Y115aAIOIkyQ/giphy.gif" alt="GIF Placeholder" />
+			</div>
+			<div class="flip-card-text">
+				<h2>About Kydan</h2>
+				<p>I'm 13 and in the 8th grade.   and I enjoy long walks on the beach.</p>
+      </div>
+		</div>
+	</div>
+</div>
+<div class="flip-card">
+	<div class="flip-card-inner">
+		<div class="flip-card-front">
+			<div class="flip-card-img">
+				<img src="https://source.unsplash.com/6jzkzv5VhyE/640x960" alt="Avatar Placeholder" />
+			</div>
+			<div class="flip-card-text">
+				<h2>Owen Maher
+       </h2>
+				<p class="title">Product Manager and Frontend Developer</p>
+<!--				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Magna etiam tempor orci eu lobortis. Consequat id porta nibh venenatis cras sed felis eget. Tortor at auctor urna nunc id cursus metus. Quis eleifend quam adipiscing vitae proin sagittis nisl rhoncus mattis.</p> -->
+			</div>
+		</div>
+		<div class="flip-card-back">
+			<div class="flip-card-img">
+				<img src="https://media.giphy.com/media/l2JI2Y115aAIOIkyQ/giphy.gif" alt="GIF Placeholder" />
+			</div>
+			<div class="flip-card-text">
+				<h2>About Owen</h2>
+				<p>I'm a 13 year old going into high school. I'm very interested in space and physics aspiring to go to M.I.T and work at NASA when I am older. </p>
+      </div>
+		</div>
+	</div>
+</div>
+<div class="flip-card">
+	<div class="flip-card-inner">
+		<div class="flip-card-front">
+			<div class="flip-card-img">
+				<img src="https://source.unsplash.com/6jzkzv5VhyE/640x960" \\alt="Avatar Placeholder" />
+			</div>
+			<div class="flip-card-text">
+				<h2>Harriet</h2>
+				<p class="title"> Backend Developer</p>
+<!--				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Magna etiam tempor orci eu lobortis. Consequat id porta nibh venenatis cras sed felis eget. Tortor at auctor urna nunc id cursus metus. Quis eleifend quam adipiscing vitae proin sagittis nisl rhoncus mattis.</p> -->
+			</div>
+		</div>
+		<div class="flip-card-back">
+			<div class="flip-card-img">
+				<img src="https://media.giphy.com/media/l2JI2Y115aAIOIkyQ/giphy.gif" alt="GIF Placeholder" />
+			</div>
+			<div class="flip-card-text">
+				<h2>About Harriet</h2>
+				<p>Hello There</p>
+      </div>
+		</div>
+	</div>
+</div>
+<style>
+  body {
+  margin: 0px auto;
+  line-height: 1;
+  font-family: 'Poppins';
+  background-color: #eeeeee;
+  color: #190033;
+}
+
+.flip-card {
+  float: left;
+  margin: 30px;
+	width: 100%;
+  max-width: 300px;
+  height: 480px;
+  perspective: 1000px;
+	background-color:
+		transparent;
+}
+
+.flip-card-img {
+	height: 300px;
+	overflow: hidden;
+	background-color: gray;
+}
+
+.flip-card img {
+	width: 100%;
+}
+
+.flip-card-text {
+	padding: 10px;
+}
+
+.flip-card h2 {
+	font-weight: 600;
+	font-size: 1.8em;
+}
+
+.flip-card p.title {
+  color: grey;
+  font-size: 1.5em;
+}
+
+.flip-card p {
+	font-size: 1em;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.6s;
+  transform-style:
+		preserve-3d;
+  box-shadow:
+		0 4px 8px 0
+		rgba(0,0,0,0.2);
+}
+
+.flip-card:hover
+.flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-back a {
+  text-decoration: none;
+  font-size: 22px;
+  color: black;
+}
+
+.flip-card-front a:hover,
+.flip-card-back a:hover {
+  color: hotpink;
+}
+
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility:
+		hidden;
+  backface-visibility: hidden;
+}
+
+.flip-card-front {
+  color: black;
+	border:
+		5px solid lightgray;
+	background-color: white;
+}
+
+.flip-card-back {
+	color: black;
+	border: 5px solid teal;
+  transform: rotateY(180deg);
+	background-color: #eeeeee;
+}
+
+.flip-card-back i {
+	padding: 15px;
+}
+</style>
+      <span style='font-family:Lucida Sans'>    </span><span style='font-family:Lucida Grande'>      </span>
+<script>
+      
+      function handler(ev) {
+        ev.preventDefault();
+        
+        //alert('here')
+        //console.log('stopped default')
+        
+        document.getElementById("file").click();      
+        
+//        console.log('submitting form ...');
+        
+      }
+  
+    document.getElementById('uploader').addEventListener('click', handler)
+    document.getElementById('file').onchange = function() {
+      document.getElementById("form").submit()
+    }
+
+      
+
+</script>

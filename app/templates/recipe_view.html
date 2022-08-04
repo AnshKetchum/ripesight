@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <title>Ripe Sight</title>
+<div class="topnav">
+  <a href="{{ url_for('home') }}">Home</a><div style='text-align:center'></div>
+  <a href="{{ url_for('login') }}">Login</a>
+  <a href="{{ url_for('recipes') }}">Recipes</a>
+  <a href="#about">Create Account</a>
+</div>
+<h1 class="title1">Welcome to RipeSight</h1>
+  <p class="title5" style="display:table;margin:auto"><img class="gears" id="gear1" src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fclipart-library.com%2Fimages_k%2Fgear-clipart-transparent%2Fgear-clipart-transparent-5.png&f=1&nofb=1" style="width:5vw;">Powered by ML<img class="gears" id="gear2" src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fclipart-library.com%2Fimages_k%2Fgear-clipart-transparent%2Fgear-clipart-transparent-5.png&f=1&nofb=1" style="width:5vw;"></p>  
+  <style>
+    .solid-hr {
+      border-top: 8px solid black;
+      border-radius: 5px;
+    }
+    .image-recog {
+      display:table;
+      text-align:center;
+      margin:auto;
+    }
+    @keyframes rotate1 {
+      from {transform: rotate(-45deg)}
+      to {transform: rotate(45deg)}
+    }
+    @keyframes rotate2 {
+      from {transform: rotate(45deg)}
+      to {transform: rotate(-45deg)}
+    }
+    #gear1 {
+      animation: rotate1 2s;
+    }
+    #gear2 {
+      animation: rotate2 2s;
+    }
+    .title6 {
+      text-align: center;
+      font-size: 30px;
+    }
+    .title5 {
+      margin-left:21vw;
+      padding: 10px;
+      font-size: 60px;
+    }
+    .gears {
+      filter: brightness(1);
+      display:inline;
+    }
+    */
+    body {
+      font-family: Poppins;
+    }
+    .title3 {
+      margin: auto;
+      margin-top: 5px;
+      margin-bottom: 5px;
+      padding: 10px;
+      text-align: center;
+      font-size: 40px;
+    }
+    .title2{
+      margin: auto;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      width: 25%;
+      padding: 10px;
+      text-align: center;
+      font-size: 40px;
+      opacity: 1.0;
+    }
+    .title1{
+      animation-duration: 3s;
+      animation-name: slidein-right;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      padding: 10px;
+      font-size: 60px;
+      text-align:center;
+    }
+        /* Add a black background color to the top navigation */
+    .topnav {
+      background-color: #0093E9;
+      background-image: linear-gradient(160deg, #00FF6F 0%, #80D0C7 100%);
+      overflow: hidden;
+      background-color: #B5B5B5;
+    }
+
+    /* Style the links inside the navigation bar */
+    .topnav a {
+      background-color: #80D0C7;
+      transition background-color 1s;
+      float: left;
+      color: #f2f2f2;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+      font-size: 17px;
+      transition: background-color 0.5s;
+      transition: color 0.5s;
+      margin: 0px 0px;
+    }
+
+    /* Change the color of links on hover */
+    .topnav a:hover {
+      background-color: #33FF99;
+      transition background-color 1s;
+      color: black;
+      transition: background-color 0.5s;
+      transition: color 0.5s;
+    }
+
+    /* Add a color to the active/current link */
+    .topnav a.active {
+      background-color: #0BDFB5;
+      color: white;
+    }
+    
+    
+    .search {
+      display: table;
+      margin: auto;
+      /*padding-left:20vw;
+      padding-right:20vw;*/
+      width:40vw;
+      padding-top: 1vh;
+      padding-bottom: 1vh;
+      border-radius: 50px;
+      border: none;
+      background-color: white;
+      transition: background-color 0.5s;
+      color: #404040;
+    }
+    .search:focus {
+      background-color: #99CCFF;
+      transition: background-color 0.5s;
+    }
+  </style>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      background-color: #F4D03F;
+      background-image: linear-gradient(132deg, #9EFFA4 0%, #16A085 100%);
+    }
+    /* Add a black background color to the top navigation */
+    /* Style the links inside the navigation bar */
+
+    .container h1, p {
+      text-align: center;
+    }
+    .search-results li {
+      background-color:white;
+      padding-top:5px;
+      padding-bottom:5px;
+      border-style:solid;
+      border-width:1px;
+      padding-left:15px;
+      text-align: left;
+      width: 75%;
+      margin-left: auto;
+      margin-right:auto;
+      border-color: #ddd;
+        /* CLICK THE BUTTON LABELED TEST*/
+      /*Thats how are website will add recipes*/
+    }
+    .iframe {
+      width:100vw;
+      height:100vh;
+    }
+  </style>
+
+</head>
+
+<body onload="getSave()">
+  
+
+  <h5 style="text-align:center">
+    Courtesy of <a href="www.allrecipes.com">allrecipes.com</a>
+  </h5>
+  <h6 style="text-align:center">
+    To homepage <a href="index.html">click here</a>
+  </h6>
+  <iframe src="
+<hr size='1'/>
+" title="Iframe Example" class="iframe" id="iframeSrc"></iframe>
+  
+  
+  
+  
+  
+</body>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+  body {
+  font-family: 'Poppins';
+  color: #190033;
+}
+</style><span style='font-family:Lucida Sans'>    </span><span style='font-family:Lucida Grande'>    </span>
+      <script>
+       /*const title = {{ titles }};
+        const description = {{ descriptions }};
+        const rating = {{ ratings }};
+        const url = {{ urls }};*/
+      function getSave() {
+        try {
+          var iframe = document.getElementById("iframeSrc");
+          iframe.src = sessionStorage.getItem("recipe");
+        } catch (error) {
+          console.log("nope");
+        }
+      }
+      function startAnimation(element) {
+        var el1 = document.getElementById("gear1");
+        var el2 = document.getElementById("gear2");
+        
+        el1.style.animation = "rotate1 2s infinite"
+        el2.style.animation = "rotate2 2s infinite"
+      }
+        
+      function blurFunction(element) {
+        var el1 = document.getElementById("gear1");[]
+        var el2 = document.getElementById("gear2");
+        
+        el1.style.animation = "rotate1 2s"
+        el2.style.animation = "rotate2 2s"
+      }
+      </script>
+
+
+
+<div style='text-align:center'></div>
