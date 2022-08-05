@@ -128,7 +128,6 @@ Thumbs.db
 *.term
 ripesight-firebase-adminsdk-8dne2-7a07c80392.json
 nlp/
-static/uploads/image-upload/*
 best.pt
 *.partial-upload
 *.bin
