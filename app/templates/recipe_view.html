@@ -6,7 +6,8 @@
   <a href="{{ url_for('home') }}">Home</a><div style='text-align:center'></div>
   <a href="{{ url_for('login') }}">Login</a>
   <a href="{{ url_for('recipes') }}">Recipes</a>
-  <a href="#about">Create Account</a>
+  <a href="{{ url_for('create_account') }}">Create Account</a>
+  <a href="{{ url_for('display_favorites') }}">Favorite Recipes</a>
 </div>
 <h1 class="title1">Welcome to RipeSight</h1>
   <p class="title5" style="display:table;margin:auto"><img class="gears" id="gear1" src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fclipart-library.com%2Fimages_k%2Fgear-clipart-transparent%2Fgear-clipart-transparent-5.png&f=1&nofb=1" style="width:5vw;">Powered by ML<img class="gears" id="gear2" src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fclipart-library.com%2Fimages_k%2Fgear-clipart-transparent%2Fgear-clipart-transparent-5.png&f=1&nofb=1" style="width:5vw;"></p>  
@@ -182,6 +183,7 @@
   <h6 style="text-align:center">
     To homepage <a href="index.html">click here</a>
   </h6>
+  <span style="display:table;margin: 0 auto;"><input type=checkbox id="favorited" onchange="favorite()"> Favorite/save this recipe</span>
   <iframe src="
 <hr size='1'/>
 " title="Iframe Example" class="iframe" id="iframeSrc"></iframe>
@@ -203,6 +205,56 @@
         const description = {{ descriptions }};
         const rating = {{ ratings }};
         const url = {{ urls }};*/
+      function ajax(url, requestType, objectToSend, doneFunc=null, containsMultipartFormdata=false, userStorage=null) {
+    // TODO: Check for valid parameters
+    // TODO: Figure out what to put in doneFunc to check if error occurred or data returned successfully.
+
+    // If debugEnabled variable hasn't been defined at global scope, default to false
+    if (typeof window.debugEnabled === 'undefined') {
+        debugEnabled=false;
+    }
+
+    if (containsMultipartFormdata === true) {
+        // Forms with file uploads require options to handle form 'enctype' multipart/form-data.
+        $.ajax({
+            type: requestType,
+            url: url,
+            dataType: "json",
+            processData: false,         // Required for multipart/form-data: Don't process data before sending
+            contentType: false,         // Required for multipart/form-data: Don't use "application/x-www-form-urlencoded"
+            userStorage: userStorage,   // General purpose context info storage to be available from doneFunc
+            data: objectToSend
+        }).always(ajaxDone)
+
+    } else {
+        // Forms/data without file transfer
+        $.ajax({
+            type: requestType,
+            url: url,
+            dataType: "json",
+            userStorage: userStorage,   // General purpose context info storage to be available from doneFunc
+            data: objectToSend
+        }).always(ajaxDone)
+    }
+
+    // Debug wrapper function
+    function ajaxDone(data) {
+        if (debugEnabled) {
+            console.log("Ajax RX: ", data)
+        }
+
+        // Call desired done function
+        if (doneFunc != null) {
+            // Pass response data and 'this' to allow access from the doneFunc to the ajax query's original object (specifically, to
+            // allow access to userStorage).
+            doneFunc(data, this);
+        }
+    }
+
+    if (debugEnabled) {
+        console.log("Ajax TX: ", objectToSend)
+    }
+}
       function getSave() {
         try {
           var iframe = document.getElementById("iframeSrc");
@@ -226,6 +278,33 @@
         el1.style.animation = "rotate1 2s"
         el2.style.animation = "rotate2 2s"
       }
+      function finishFunc(data,context) {
+        console.log("New data:");
+        console.log(data);
+    }
+    function sendFavorite(newData) {
+      var sendReady = newData;
+      
+      
+      console.log("To be sent:");
+      console.log(sendReady);
+      ajax("{{ url_for('getFav') }}", "post", sendReady, finishFunc, containsMultipartFormdata=false, userStorage=null);
+      /*$.ajax({
+         type: "POST",
+          url: "{{ url_for('sendRecipe') }}",
+          data: sendReady,
+          contentType: "application/json",
+          dataType: 'json',
+          success: function(newRecipeArr) {
+             console.log("New recipe:");
+             console.log(newRecipeArr);
+          }
+       });*/
+    }
+    function favorite() {
+      if ("{{ session_key }}"!="-1")
+      sendFavorite({"array1": [document.getElementById("iframeSrc").src,"{{ session_key }}"]})
+    }
       </script>
 
 

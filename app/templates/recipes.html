@@ -6,14 +6,19 @@
   <a href="{{ url_for('home') }}">Home</a><div style='text-align:center'></div>
   <a href="{{ url_for('login') }}">Login</a>
   <a class="active" href="#active">Recipes</a>
-  <a href="#about">Create Account</a>
+  <a href="{{ url_for('create_account') }}">Create Account</a>
+  <a href="{{ url_for('display_favorites') }}">Favorite Recipes</a>
 </div>
 <h1 class="title1">Welcome to RipeSight</h1>
   <p class="title5" style="display:table;margin:auto"><img class="gears" id="gear1" src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fclipart-library.com%2Fimages_k%2Fgear-clipart-transparent%2Fgear-clipart-transparent-5.png&f=1&nofb=1" style="width:5vw;">Powered by ML<img class="gears" id="gear2" src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fclipart-library.com%2Fimages_k%2Fgear-clipart-transparent%2Fgear-clipart-transparent-5.png&f=1&nofb=1" style="width:5vw;"></p>  
   
   <div class="image-recog" id="aiInsert">
     <h3 style="color: #190033;font-size:30px;font-family: Poppins;"> Here's What We Found! </h3>
-    <img class="main-img mbr-figure w-50 h-25 rounded center" id="image" src="{{ url_for('static', filename='uploads/image-upload/' + filename)}}" style="">
+<img class="main-img mbr-figure w-50 h-25 rounded center" id="image" src="{{ url_for('static', filename='uploads/image-upload/' + filename)}}" style="">
+    <!--<img class="main-img mbr-figure w-50 h-25 rounded center" id="image" src="{{base_url}}{{url_for('static', filename='uploads/image-upload/' + filename)}}" style="">-->
+    
+    <!--<img class="main-img mbr-figure w-50 h-25 rounded center" id="image" src="https://cocalc22.ai-camp.dev/projects/d76bb20d-59e1-4536-bf50-ae25d495aa4a/files/omni/app/static/uploads/image-upload/{{ filename }}" style="">-->
+    
     {%for i in message%}
       <h5 id="getMessage" style="color: #190033;font-size:20px" id="aiOut">{{ i }} ~ {{ message[i] }}</h5>
     {%endfor%}
@@ -211,9 +216,9 @@
   </ul>
 
   
-  <button onclick='yoinkRecipeData({"array1":["test","hello","world"]})'>Send ajax</button>
+  <!--<button onclick='yoinkRecipeData({"array1":["test","hello","world"]})'>Send ajax</button>-->
   <!-- HERE IS YOUR FREAKING SOLUTION-->
-  <a href="{{ url_for('view_recipe',url='test') }}" id="aneurism">I don't exist :)</a>
+  <a href="{{ url_for('view_recipe',url='test') }}" id="aneurism" style="opacity:0">I don't exist :)</a>
   
   
   
@@ -356,8 +361,9 @@ function ajax(url, requestType, objectToSend, doneFunc=null, containsMultipartFo
       yoinkRecipeData(finalSend);
     }
     function loadImageRecognition() {
-      var newMessage = document.getElementById("getMessage").innerHTML;
-      if (newMessage=="{{ message }}"||newMessage=="None"||newMessage=="0") {
+      //var newMessage = document.getElementById("getMessage").innerHTML;
+      var newMessage = "{{ message }}";
+      if (newMessage=="None"||newMessage=="0") {
         var aiElement = document.getElementById("aiInsert");
         var aiElement1 = document.getElementById("aiOut");
         aiElement.remove();
@@ -375,9 +381,10 @@ function ajax(url, requestType, objectToSend, doneFunc=null, containsMultipartFo
       console.log(newRecipeArr);
       var aiGenRecipe = document.getElementById("aiGeneratedRecipe");
       aiGenRecipe.innerHTML = "";
+      //aiGenRecipe.innerHTML = newRecipeArr;
       for (let x = 0; x<newRecipeArr.length; x++) {
         aiGenRecipe.innerHTML = aiGenRecipe.innerHTML + newRecipeArr[x];
-        aiGenRecipe.innerHTML = aiGenRecipe.innerHTML + "<br><br>";
+        aiGenRecipe.innerHTML = aiGenRecipe.innerHTML + "<br>";
       }
     }
     function yoinkRecipeData(recipe_ingredients) {

@@ -6,7 +6,8 @@
   <a class="active" href="#home">Home</a><div style='text-align:center'></div>
   <a href="{{ url_for('login') }}">Login</a>
   <a href="{{ url_for('recipes') }}">Recipes</a>
-  <a href="#about">Create Account</a>
+  <a href="{{ url_for('create_account') }}">Create Account</a>
+  <a href="{{ url_for('display_favorites') }}">Favorite Recipes</a>
 </div>
 <h1 class="title1">Welcome to RipeSight</h1>
   <p class="title5" style="display:table;margin:auto"><img class="gears" src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fclipart-library.com%2Fimages_k%2Fgear-clipart-transparent%2Fgear-clipart-transparent-5.png&f=1&nofb=1" style="width:5vw;">Powered by ML<img class="gears" src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fclipart-library.com%2Fimages_k%2Fgear-clipart-transparent%2Fgear-clipart-transparent-5.png&f=1&nofb=1" style="width:5vw;"></p>  
@@ -266,7 +267,29 @@
 	<div class="flip-card-inner">
 		<div class="flip-card-front">
 			<div class="flip-card-img">
-				<img src="https://source.unsplash.com/mHmLGROu2rI/640x853" alt="Avatar Placeholder" />
+				<img src="https://source.unsplash.com/6jzkzv5VhyE/640x960" \\alt="Avatar Placeholder" />
+			</div>
+			<div class="flip-card-text">
+				<h2>Ansh Chaurasia</h2>
+				<p class="title"> Project Mentor </p>
+			</div>
+		</div>
+		<div class="flip-card-back">
+			<div class="flip-card-img">
+				<img src="https://media.giphy.com/media/l2JI2Y115aAIOIkyQ/giphy.gif" alt="GIF Placeholder" />
+			</div>
+			<div class="flip-card-text">
+				<h2>About Ansh</h2>
+				<p>Hello There</p>
+      </div>
+		</div>
+	</div>
+</div>
+<div class="flip-card">
+	<div class="flip-card-inner">
+		<div class="flip-card-front">
+			<div class="flip-card-img">
+				<img src="https://preview.redd.it/6ivfrfgpkdn41.png?auto=webp&s=ca576cca441ac8f99c8bc502f928d9a1d1b08923" alt="Avatar Placeholder" />
 			</div>
 			<div class="flip-card-text">
 				<h2>Anne Crouch</h2>
@@ -275,7 +298,7 @@
 		</div>
 		<div class="flip-card-back">
 			<div class="flip-card-img">
-				<img src="https://media.giphy.com/media/S2whkd4LyloiI/giphy.gif" alt="Gif Placeholder" />
+				<img src="https://media1.giphy.com/media/gI7Nlpl4Qsd7jol7Wb/giphy.gif?cid=ecf05e47p8z6dv6r1f9ybj5m8zvv4ofh0dpowz2gip70zg4v&rid=giphy.gif&ct=g" alt="Gif Placeholder" />
 			</div>
 			<div class="flip-card-text">
 				<h2>About Anne</h2>
@@ -289,7 +312,7 @@
 	<div class="flip-card-inner">
 		<div class="flip-card-front">
 			<div class="flip-card-img">
-				<img src="https://source.unsplash.com/ccp20jlgtWU/640x853" alt="Avatar Placeholder" />
+				<img src="https://cdn.pixabay.com/photo/2018/05/11/08/11/dog-3389729_1280.jpg" alt="Avatar Placeholder" />
 			</div>
 			<div class="flip-card-text">
 				<h2>Ryan Cho</h2>
@@ -298,11 +321,11 @@
 		</div>
 		<div class="flip-card-back">
 			<div class="flip-card-img">
-				<img src="https://media.giphy.com/media/kBZrg2OcrcOFJikffT/giphy.gif" alt="Gif Placeholder" />
+				<img src="https://media3.giphy.com/media/l0HlvkjN1BqwDY9SU/giphy.webp?cid=ecf05e47di5nbhdgctj5dx1ivtfwsh8v5n75anw8jod58nl1&rid=giphy.webp&ct=g" alt="Gif Placeholder" />
 			</div>
 			<div class="flip-card-text">
 				<h2>About Ryan</h2>
-				<p>I'm a rising sophomore based in Illinois, interested in medicine, data science, and competitive math!</p>
+				<p>I'm a rising sophomore based in Illinois, interested in medicine, data science, and competitive math! I love ice cream!</p>
 			</div>
 		</div>
 	</div>
@@ -312,7 +335,7 @@
 	<div class="flip-card-inner">
 		<div class="flip-card-front">
 			<div class="flip-card-img">
-				<img src="https://source.unsplash.com/xbVTW7sykVw/640x817" alt="Avatar Placeholder" />
+				<img src="https://i.pinimg.com/originals/c8/10/b6/c810b665a1319cb43d592337171a97cb.jpg" alt="Avatar Placeholder" />
 			</div>
 			<div class="flip-card-text">
 				<h2>Brett Smith</h2>
@@ -321,11 +344,12 @@
 		</div>
 		<div class="flip-card-back">
 			<div class="flip-card-img">
-				<img src="https://media.giphy.com/media/26gsuJYcHXm0oARQQ/giphy.gif" alt="Avatar Placeholder" />
+				<img src="https://media1.giphy.com/media/7XuKKmGiaxXe6EjOj4/giphy.gif?cid=ecf05e471bmnf3pi56q97hriajjc4qg9hxj15w91vhraj4dj&rid=giphy.gif&ct=g
+" alt="Avatar Placeholder" />
 			</div>
 			<div class="flip-card-text">
 				<h2>About Brett</h2>
-				<h1>no</h1>
+				<h4>I am a 15 year-old from central Virginia, and I have an interest in science, mathematics, and programming.</h4>
 			</div>
 		</div>
 	</div>
@@ -335,17 +359,16 @@
 	<div class="flip-card-inner">
 		<div class="flip-card-front">
 			<div class="flip-card-img">
-				<img src="https://source.unsplash.com/6jzkzv5VhyE/640x960" alt="Avatar Placeholder" />
+				<img src="https://cdn.discordapp.com/attachments/1002654956144304278/1004815723358584993/grey_banna.png" alt="Avatar Placeholder" />
 			</div>
 			<div class="flip-card-text">
 				<h2>Kydan Taylor</h2>
 				<p class="title">Machine Learning and Backend Developer</p>
-<!--				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Magna etiam tempor orci eu lobortis. Consequat id porta nibh venenatis cras sed felis eget. Tortor at auctor urna nunc id cursus metus. Quis eleifend quam adipiscing vitae proin sagittis nisl rhoncus mattis.</p> -->
 			</div>
 		</div>
 		<div class="flip-card-back">
 			<div class="flip-card-img">
-				<img src="https://media.giphy.com/media/l2JI2Y115aAIOIkyQ/giphy.gif" alt="GIF Placeholder" />
+				<img src="https://c.tenor.com/P9DFtD3HjcwAAAAd/cat-cats-love.gif" alt="GIF Placeholder" />
 			</div>
 			<div class="flip-card-text">
 				<h2>About Kydan</h2>
@@ -358,18 +381,17 @@
 	<div class="flip-card-inner">
 		<div class="flip-card-front">
 			<div class="flip-card-img">
-				<img src="https://source.unsplash.com/6jzkzv5VhyE/640x960" alt="Avatar Placeholder" />
+				<img src="https://cdn.pixabay.com/photo/2020/04/09/12/28/dog-5021242_960_720.jpg" alt="Avatar Placeholder" />
 			</div>
 			<div class="flip-card-text">
 				<h2>Owen Maher
        </h2>
 				<p class="title">Product Manager and Frontend Developer</p>
-<!--				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Magna etiam tempor orci eu lobortis. Consequat id porta nibh venenatis cras sed felis eget. Tortor at auctor urna nunc id cursus metus. Quis eleifend quam adipiscing vitae proin sagittis nisl rhoncus mattis.</p> -->
 			</div>
 		</div>
 		<div class="flip-card-back">
 			<div class="flip-card-img">
-				<img src="https://media.giphy.com/media/l2JI2Y115aAIOIkyQ/giphy.gif" alt="GIF Placeholder" />
+				<img src="https://media1.giphy.com/media/26vUMnI0euJWoc27C/giphy.gif?cid=790b7611df0179eb0f8e6033bce6e3ce509df5a6f2897323&rid=giphy.gif&ct=g" alt="GIF Placeholder" />
 			</div>
 			<div class="flip-card-text">
 				<h2>About Owen</h2>
@@ -387,7 +409,6 @@
 			<div class="flip-card-text">
 				<h2>Harriet</h2>
 				<p class="title"> Backend Developer</p>
-<!--				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Magna etiam tempor orci eu lobortis. Consequat id porta nibh venenatis cras sed felis eget. Tortor at auctor urna nunc id cursus metus. Quis eleifend quam adipiscing vitae proin sagittis nisl rhoncus mattis.</p> -->
 			</div>
 		</div>
 		<div class="flip-card-back">
