@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <title>Ripe Sight</title>
+<div class="topnav">
+  <a href="{{ url_for('home') }}">Home</a><div style='text-align:center'></div>
+  <a class="active" href="#active">Login</a>
+  <a href="{{ url_for('recipes') }}">Recipes</a>
+  <a href="{{ url_for('create_account') }}">Create Account</a>
+  <a href="{{ url_for('display_favorites') }}">Favorite Recipes</a>
+</div>
+  <h1 class = "title1" style="width:100vw;">Welcome to RipeSite</h1>
+  <h2 class = "title2" style="width:100vw;">Account Login</h2>
+  
+  <style>
+    solid-hr {
+      border-top: 8px solid black;
+      border-radius: 5px;
+    }
+    .image-recog {
+      display:table;
+      text-align:center;
+      margin:auto;
+    }
+    @keyframes rotate1 {
+      from {transform: rotate(-45deg)}
+      to {transform: rotate(45deg)}
+    }
+    @keyframes rotate2 {
+      from {transform: rotate(45deg)}
+      to {transform: rotate(-45deg)}
+    }
+    #gear1 {
+      animation: rotate1 2s;
+    }
+    #gear2 {
+      animation: rotate2 2s;
+    }
+    
+    #loggear1 {
+      animation-name: rotate1;
+      animation-duration: 2s;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+    }
+    #loggear2 {
+      animation-name: rotate2;
+      animation-duration: 1s;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+    }
+    .title6 {
+      text-align: center;
+      font-size: 30px;
+    }
+    .title5 {
+      margin-left:21vw;
+      padding: 10px;
+      font-size: 60px;
+    }
+    .gears {
+      filter: brightness(1);
+      display:inline;
+    }
+    */
+    body {
+      font-family: Poppins;
+    }
+    .title3 {
+      margin: auto;
+      margin-top: 5px;
+      margin-bottom: 5px;
+      padding: 10px;
+      text-align: center;
+      font-size: 40px;
+    }
+    .title2{
+      margin: auto;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      width: 25%;
+      padding: 10px;
+      text-align: center;
+      font-size: 40px;
+      opacity: 1.0;
+    }
+    .title1{
+      animation-duration: 3s;
+      animation-name: slidein-right;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      padding: 10px;
+      font-size: 60px;
+      text-align:center;
+    }
+        /* Add a black background color to the top navigation */
+    .topnav {
+      background-color: #0093E9;
+      background-image: linear-gradient(160deg, #00FF6F 0%, #80D0C7 100%);
+      overflow: hidden;
+      background-color: #B5B5B5;
+    }
+
+    /* Style the links inside the navigation bar */
+    .topnav a {
+      background-color: #80D0C7;
+      transition background-color 1s;
+      float: left;
+      color: #f2f2f2;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+      font-size: 17px;
+      transition: background-color 0.5s;
+      transition: color 0.5s;
+      margin: 0px 0px;
+    }
+
+    /* Change the color of links on hover */
+    .topnav a:hover {
+      background-color: #33FF99;
+      transition background-color 1s;
+      color: black;
+      transition: background-color 0.5s;
+      transition: color 0.5s;
+    }
+
+    /* Add a color to the active/current link */
+    .topnav a.active {
+      background-color: #0BDFB5;
+      color: white;
+    }
+    
+    
+    .search {
+      display: table;
+      margin: auto;
+      /*padding-left:20vw;
+      padding-right:20vw;*/
+      width:40vw;
+      padding-top: 1vh;
+      padding-bottom: 1vh;
+      border-radius: 50px;
+      border: none;
+      background-color: white;
+      transition: background-color 0.5s;
+      color: #404040;
+    }
+    .search:focus {
+      background-color: #99CCFF;
+      transition: background-color 0.5s;
+    }
+  </style>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      background-color: #F4D03F;
+      background-image: linear-gradient(132deg, #9EFFA4 0%, #16A085 100%);
+    }
+    /* Add a black background color to the top navigation */
+    /* Style the links inside the navigation bar */
+
+    .container h1, p {
+      text-align: center;
+    }
+    .search-results li {
+      background-color:white;
+      padding-top:5px;
+      padding-bottom:5px;
+      border-style:solid;
+      border-width:1px;
+      padding-left:15px;
+      text-align: left;
+      width: 75%;
+      margin-left: auto;
+      margin-right:auto;
+      border-color: #ddd;
+        /* CLICK THE BUTTON LABELED TEST*/
+      /*Thats how are website will add recipes*/
+    }
+    .loginForm {
+      text-align: center;
+      border-style: solid;
+      padding-bottom: 5vh;
+      margin: auto 30vw;
+      padding-top: 1vh;
+      border-radius:10px;
+      margin-top:10vh;
+    }
+    .username {
+      display: table;
+      margin: auto;
+      /*padding-left:20vw;
+      padding-right:20vw;*/
+      width:20vw;
+      padding-top: 1vh;
+      padding-bottom: 1vh;
+      border-radius: 50px;
+      border: none;
+      background-color: white;
+      transition: background-color 0.5s;
+      color: #404040;
+      font-size: 15px;
+    }
+    .username:focus {
+      background-color: #99CCFF;
+      transition: background-color 0.5s;
+    }
+    .password {
+      display: table;
+      margin: auto;
+      /*padding-left:20vw;
+      padding-right:20vw;*/
+      width:20vw;
+      padding-top: 1vh;
+      padding-bottom: 1vh;
+      border-radius: 50px;
+      border: none;
+      background-color: white;
+      transition: background-color 0.5s;
+      color: #404040;
+      font-size: 15px;
+    }
+    .password:focus {
+      background-color: #99CCFF;
+      transition: background-color 0.5s;
+    }
+    .upload-button {
+      border-style: none;
+      font-size: 30px;
+      background-color: lightblue;
+      border-radius: 20px;
+      color: white;
+      padding: 15px 30px;
+      box-shadow: 5px 5px 5px #808080;
+    }
+    .upload-button:active {
+      box-shadow: 1px 1px 5px #808080;
+    }
+  </style>
+
+</head>
+
+<body onload="passAlert()">
+  
+<form class="loginForm" method="POST" action="{{ url_for('getLogin') }}">
+  Enter your username and password here.
+  <br>
+  <span class="lg-border">
+    <img class="gears" id="loggear1" src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fclipart-library.com%2Fimages_k%2Fgear-clipart-transparent%2Fgear-clipart-transparent-5.png&f=1&nofb=1" style="width:5vw;">
+    <img class="gears" id="loggear2" src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fclipart-library.com%2Fimages_k%2Fgear-clipart-transparent%2Fgear-clipart-transparent-5.png&f=1&nofb=1" style="width:2.5vw;">
+    <br>
+    <input type="text" name="Uname" class="username" placeholder="Username: ">
+    <br>
+    <input type="password" name="PSword" class="password" placeholder="Password: ">
+    <br>
+    <input type="submit" class="upload-button" value="Login ➔">
+    <p>
+      Welcome to RipeSight! Create an account to save your scan data and to support our team!
+    </p>
+  </span>
+  </form>
+  
+  
+  
+</body>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+  body {
+  font-family: 'Poppins';
+  color: #190033;
+}
+</style><span style='font-family:Lucida Sans'>    </span><span style='font-family:Lucida Grande'>    </span>
+      <script>
+       function passAlert() {
+         if ("{{ msg }}" != "-1") {
+           alert("{{ msg }}")
+         }
+       }
+       /*const title = {{ titles }};
+        const description = {{ descriptions }};
+        const rating = {{ ratings }};
+        const url = {{ urls }};*/
+      function getSave() {
+        try {
+          var iframe = document.getElementById("iframeSrc");
+          iframe.src = sessionStorage.getItem("recipe");
+        } catch (error) {
+          console.log("nope");
+        }
+      }
+      function startAnimation(element) {
+        var el1 = document.getElementById("gear1");
+        var el2 = document.getElementById("gear2");
+        
+        el1.style.animation = "rotate1 2s infinite"
+        el2.style.animation = "rotate2 2s infinite"
+      }
+        
+      function blurFunction(element) {
+        var el1 = document.getElementById("gear1");[]
+        var el2 = document.getElementById("gear2");
+        
+        el1.style.animation = "rotate1 2s"
+        el2.style.animation = "rotate2 2s"
+      }
+      function saveSessionKey() {
+        if ("{{ session_key }}" != "-1") {
+          sessionStorage.setItem("session_key","{{ session_key }}")
+          alert(sessionStorage.getItem("session_key"));
+        }
+      }
+      </script>
+
+
+
