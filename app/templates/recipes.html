@@ -64,7 +64,7 @@
       filter: brightness(1);
       display:inline;
     }
-    */
+
     body {
       font-family: Poppins;
     }
@@ -106,7 +106,7 @@
     /* Style the links inside the navigation bar */
     .topnav a {
       background-color: #80D0C7;
-      transition background-color 1s;
+      transition: background-color 1s;
       float: left;
       color: #f2f2f2;
       text-align: center;
@@ -187,7 +187,7 @@
       padding-right: auto;
       padding: 1vh 1vw;
       background-color: white;
-      border-radius:
+      /*border-radius:*/
     }
     .autogen-recipes p {
       text-align: left;
@@ -197,8 +197,9 @@
 </head>
 
 <body onload="loadImageRecognition()">
-  
-  <form>
+
+  <!-- To prevent form submit when enter pressed on search field, set onsubmit="return false" -->
+  <form onsubmit="return false">
     <input type="search" class="search" placeholder=" Search..." onfocus="startAnimation(this.id)" onblur="blurFunction(this.id)" onchange="getSearch()" id="input">
   </form>
   <br>
@@ -366,8 +367,10 @@ function ajax(url, requestType, objectToSend, doneFunc=null, containsMultipartFo
       if (newMessage=="None"||newMessage=="0") {
         var aiElement = document.getElementById("aiInsert");
         var aiElement1 = document.getElementById("aiOut");
-        aiElement.remove();
-        aiElement1.remove();
+        if (aiElement)
+            aiElement.remove();
+        if (aiElement1)
+            aiElement1.remove();
         }
       }
         /* YOU WANT A DARN SOLUTION? ILL GIVE YOU A SOLUTION*/
@@ -406,9 +409,6 @@ function ajax(url, requestType, objectToSend, doneFunc=null, containsMultipartFo
           }
        });*/
     }
-
-
-
 
 
       </script>
