@@ -153,8 +153,8 @@ app.config['MAX_CONTENT_LENGTH'] = 32 * 1024 * 1024
 app.config['SECRET_KEY'] = os.urandom(24)
 
 
-# UNCOMMENT THIS EVENTUALLY
-model = torch.hub.load("ultralytics/yolov5", "custom", path = 'best.pt', force_reload=True)
+# DMS: Pin to version of yolov5 used at the time this program was developed.
+model = torch.hub.load("ultralytics/yolov5:731a2f8c1ff060bda5e84e34c7cbdd637cfe4d75", "custom", path = 'best.pt', force_reload=True)
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
